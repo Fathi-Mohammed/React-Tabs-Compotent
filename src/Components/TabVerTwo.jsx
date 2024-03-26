@@ -12,6 +12,8 @@
 
 import { useState } from "react";
 
+import styles from './TabsVerTwo.module.scss';
+
 export default function TabVerTwo({ children, indexOfActiveTab }) {
   // set active tab from children
   const indexOfChildActiveTab = children.findIndex(child => child.props.active);
@@ -27,7 +29,7 @@ export default function TabVerTwo({ children, indexOfActiveTab }) {
   const tabs = children.map((tab, index) => {
     const label = tab.props.label;
     return (
-      <li className="tab" key={index} onClick={() => setActiveTab(index)}>
+      <li className={`${styles.tab} ${activeTab === index ? styles.active : ""}`} key={index} onClick={() => setActiveTab(index)}>
         {label}
       </li>
     );
@@ -37,7 +39,7 @@ export default function TabVerTwo({ children, indexOfActiveTab }) {
     const label = tab.props.label;
     return (
       activeTab === index && (
-        <div className="content" key={label}>
+        <div className={styles.tabContent} key={label}>
           {tab}
         </div>
       )
@@ -46,8 +48,8 @@ export default function TabVerTwo({ children, indexOfActiveTab }) {
 
   return (
     <div>
-      <ul className="tabs">{tabs}</ul>
-      <div className="tabs-content">{contents}</div>
+      <ul className={styles.tabsWrapper}>{tabs}</ul>
+      {contents}
     </div>
   );
 }
