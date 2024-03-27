@@ -1,0 +1,26 @@
+.tab {
+  padding: 5px 30px;
+  height: 53px;
+  color: #003554;
+  font-size: 18px;
+  font-weight: 700;
+  border: 1px solid #003554;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  
+  &.active {
+    background-color: #003554;
+    color: #fff;
+
+    .icon {
+      color: #fff;
+    }
+  }
+}  
+
+.icon {
+  color: #003554;
+}

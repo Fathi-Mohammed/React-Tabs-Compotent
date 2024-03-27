@@ -6,21 +6,24 @@
     -> active: string (used in children to set active tab) Ex : <Tab label="Tab 1" active="true" />
 
   Priority order for Setting active tab:
-    1. children
-    2. props
+    1. children prop
+    2. indexOfActiveTab prop
 */
 
-import { useState } from "react";
-
-import styles from './TabsVerTwo.module.scss';
+import { useMemo, useState } from "react";
+import styles from "./TabsVerTwo.module.scss";
 
 export default function TabVerTwo({ children, indexOfActiveTab }) {
   // set active tab from children
-  const indexOfChildActiveTab = children.findIndex(child => child.props.active);
-  const defaultActiveTabFromChildrenProp = indexOfChildActiveTab === -1 ? 0 : indexOfChildActiveTab;
+  const indexOfChildActiveTab = children.findIndex(
+    (child) => child.props.active
+  );
+  const defaultActiveTabFromChildrenProp =
+    indexOfChildActiveTab === -1 ? 0 : indexOfChildActiveTab;
 
   // set active tab from props
-  const defaultActiveTabFromProps = indexOfActiveTab > children.length-1 ? 0 : indexOfActiveTab;
+  const defaultActiveTabFromProps =
+    indexOfActiveTab > children.length - 1 ? 0 : indexOfActiveTab;
 
   const [activeTab, setActiveTab] = useState(
     defaultActiveTabFromChildrenProp || defaultActiveTabFromProps || 0
@@ -29,22 +32,16 @@ export default function TabVerTwo({ children, indexOfActiveTab }) {
   const tabs = children.map((tab, index) => {
     const label = tab.props.label;
     return (
-      <li className={`${styles.tab} ${activeTab === index ? styles.active : ""}`} key={index} onClick={() => setActiveTab(index)}>
-        {label}
+      <li
+        className={`${styles.tab} ${activeTab === index ? styles.active : ""}`}
+        key={index}
+        onClick={() => setActiveTab(index)}>
+        {tab.props.icon}{label}
       </li>
     );
   });
 
-  const contents = children.map((tab, index) => {
-    const label = tab.props.label;
-    return (
-      activeTab === index && (
-        <div className={styles.tabContent} key={label}>
-          {tab}
-        </div>
-      )
-    );
-  });
+  const contents = useMemo(() => children[activeTab], [children, activeTab]);
 
   return (
     <div>

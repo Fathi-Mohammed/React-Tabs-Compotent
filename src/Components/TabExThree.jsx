@@ -1,10 +1,13 @@
-import TabVerTwo from "./TabVerTwo";
+// import TabVerTwo from "./TabVerTwo";
 import SignIn from "./SignIn";
+import { FaDatabase, FaUser } from "react-icons/fa";
+import { IoDocumentText } from "react-icons/io5";
+import { AchivementsTabs } from "./AchivementsTabs";
 
 export default function TabExThree() {
   return (
-    <TabVerTwo indexOfActiveTab={2}>
-      <div label="Tab 1">
+    <AchivementsTabs indexOfActiveTab={2}>
+      <div icon={<IoDocumentText />} title="Tab 1">
         <h1>Title Example</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae,
@@ -13,10 +16,10 @@ export default function TabExThree() {
           molestiae autem itaque?
         </p>
       </div>
-      <div active={"true"} label="Tab 2">
+      <div icon={<FaUser />} title="Tab 2">
         <SignIn />
       </div>
-      <div label="Tab 3">
+      <div icon={<FaDatabase />} title="Tab 3">
         <h1>Title Example 3</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae,
@@ -25,6 +28,6 @@ export default function TabExThree() {
           molestiae autem itaque?
         </p>
       </div>
-    </TabVerTwo>
+    </AchivementsTabs>
   );
 }
