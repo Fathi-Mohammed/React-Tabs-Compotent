@@ -1,33 +1,50 @@
 // import TabVerTwo from "./TabVerTwo";
+import { useEffect, useState } from "react";
 import SignIn from "./SignIn";
-import { FaDatabase, FaUser } from "react-icons/fa";
-import { IoDocumentText } from "react-icons/io5";
-import { AchivementsTabs } from "./AchivementsTabs";
+import { Tabs } from "./Tabs";
 
 export default function TabExThree() {
+  const [activeTab, setActiveTab] = useState(2);
+  const [value, setValue] = useState(0);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setActiveTab(+value);
+  }
+
+  const handleChange = (index) => {
+    setActiveTab(index);
+    console.log("activeTab", activeTab);
+  }
+
+  useEffect(() => {
+    console.log("activeTab", activeTab);
+  }, [activeTab]);
+
+  const items = [
+    {
+      key: 1,
+      title: "Sign In",
+      children: <SignIn />,
+
+    },
+    {
+      key: 2,
+      title: "Database",
+      children: <div>Database</div>,
+    },
+    {
+      key: 3,
+      title: "Documents",
+      children: <div>Documents</div>,
+    },
+  ];
   return (
-    <AchivementsTabs indexOfActiveTab={2}>
-      <div icon={<IoDocumentText />} title="Tab 1">
-        <h1>Title Example</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae,
-          doloremque! Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Dolore optio laboriosam dicta eum qui consequuntur, iusto magni
-          molestiae autem itaque?
-        </p>
-      </div>
-      <div icon={<FaUser />} title="Tab 2">
-        <SignIn />
-      </div>
-      <div icon={<FaDatabase />} title="Tab 3">
-        <h1>Title Example 3</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae,
-          doloremque! Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Dolore optio laboriosam dicta eum qui consequuntur, iusto magni
-          molestiae autem itaque?
-        </p>
-      </div>
-    </AchivementsTabs>
+
+    <>
+    <input type="number" onChange={(e) => setValue(e.target.value)} value={value}  />
+    <button onClick={handleSubmit}>Set active tab</button>
+    <Tabs items={items} indexOfActiveTab={activeTab} onChange={handleChange}/>
+    </>
   );
 }

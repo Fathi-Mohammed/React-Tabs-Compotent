@@ -10,7 +10,9 @@
   justify-content: center;
   gap: 10px;
   cursor: pointer;
-  
+  background-color: transparent;
+  outline: none;
+
   &.active {
     background-color: #003554;
     color: #fff;
@@ -19,7 +21,11 @@
       color: #fff;
     }
   }
-}  
+
+  &:disabled {
+    cursor: default;
+  }
+}
 
 .icon {
   color: #003554;
